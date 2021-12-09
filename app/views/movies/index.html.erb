@@ -1,9 +1,26 @@
-<% @movies.each do |movie|%>
-  <h2><%= movie.title %> </h2>
-  <time datetime="<%= movie.created_at_formatted%>">
-    <%= movie.created_at_formatted %>
-  </time>
-  <p>
-    <%= movie.body %>
-  </p>
+<h1 class="mb-4">Movies</h1>
+
+<%= link_to 'New movie', new_movie_path, class: 'btn btn-primary btn-lg' %>
+
+<% @movies.each do |movie| %>
+  <article class="card mt-3">
+    <div class="card-body">
+      <h4><%= movie.title %></h2>
+
+      <section class="card-text">
+        <time datetime="<%= movie.created_at_formatted %>">
+          <small><%= movie.created_at_formatted %></small>
+        </time>
+
+        <p class="my-2">
+          <%= movie.body %>
+        </p>
+      </section>
+
+      <%= link_to 'Show', movie_path(movie), class: 'btn btn-primary' %> 
+      <%= link_to 'Edit', edit_movie_path(movie), class: 'btn btn-secondary' %>
+      <%= link_to 'Destroy', movie_path(movie), class: 'btn btn-danger',
+        data: {method: :delete, confirm: 'Are you sure?'} %>
+    </div>
+  </article>
 <% end %>
