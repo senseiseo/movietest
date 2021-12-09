@@ -1,0 +1,9 @@
+<% @movies.each do |movie|%>
+  <h2><%= movie.title %> </h2>
+  <time datetime="<%= movie.created_at_formatted%>">
+    <%= movie.created_at_formatted %>
+  </time>
+  <p>
+    <%= movie.body %>
+  </p>
+<% end %>
