@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :movies
-  get '/movies', to: 'movies#index'
-  root 'movies#index'
+  resources :categories do 
+    resources :movies
+  end 
+  post 
+  root 'pages#index'
 end
