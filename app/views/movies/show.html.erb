@@ -8,7 +8,6 @@
   <%= @movie.body %>
 </p>
 
-<%= link_to 'Show', movie_path(@movie), class: 'btn btn-primary' %> 
-<%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-secondary' %>
-<%= link_to 'Destroy', movie_path(@movie), class: 'btn btn-danger',
+<%= link_to 'Edit', edit_category_movie_path(@category, @movie), class: 'btn btn-secondary' %>
+<%= link_to 'Destroy', category_movie_path(@category, @movie), class: 'btn btn-danger',
   data: {method: :delete, confirm: 'Are you sure?'} %>

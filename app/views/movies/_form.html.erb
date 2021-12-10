@@ -1,5 +1,5 @@
 <%= render 'shared/errors', object: @movie %>
-<%= form_with model: @movie do |f| %>
+<%= form_with model:  [@category, @movie] do |f| %>
   <div class="mb-3 row">
     <div class="col-sm-2 col-form-label">
       <%= f.label :title %>

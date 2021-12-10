@@ -1,0 +1,17 @@
+<h1 class="mb-4"><%= @category.name %></h1>
+<%= link_to 'New movie', new_category_movie_path(@category), class: 'btn btn-primary btn-lg' %>
+
+<% @movie.each do |movie| %>
+  <h1 class="mb-4"><%= movie.title %></h1>
+  <time datetime="<%= movie.created_at_formatted %>">
+    <%= movie.created_at_formatted %>
+  </time>
+  <p class="lead my-3">
+    <%= movie.body %>
+  </p>
+
+  <%= link_to 'Show', category_movie_path(@category, movie), class: 'btn btn-primary' %> 
+  <%#= link_to 'Edit', edit_category_movie_path(@category, movie), class: 'btn btn-secondary' %>
+  <%#= link_to 'Destroy', category_movie_path(@category, movie), class: 'btn btn-danger',
+    data: {method: :delete, confirm: 'Are you sure?'} %> 
+<% end %>

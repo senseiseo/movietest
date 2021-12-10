@@ -1,18 +1,17 @@
 class MoviesController < ApplicationController
-  
+  before_action :find_movie, only: %i[show edit update destroy]
+  before_action :find_movie_category
+
   def show 
-    @movie = Movie.find_by id: params[:id]
   end 
 
   def edit 
-    @movie = Movie.find_by id: params[:id]
   end 
 
   def update 
-    @movie = Movie.find_by id: params[:id]
     if @movie.update movie_params 
       flash[:success] = "Movie updated"
-      redirect_to movies_path
+      redirect_to category_movie_path
     else
       render :edit
     end 
@@ -23,21 +22,20 @@ class MoviesController < ApplicationController
   end 
 
   def new 
-    @movie  = Movie.new
+    @movie = Movie.new
   end 
 
-  def create 
-    @movie = Movie.new movie_params
-    if @movie.save 
+  def create
+    movie = @category.movies.build movie_params 
+    if movie.save 
       flash[:success] = "Movie created"
-      redirect_to movies_path
+      redirect_to category_path(@category)
     else
       render :new
     end 
   end 
 
   def destroy
-    @movie = Movie.find_by id: params[:id]
     @movie.destroy
     flash[:success] = "Movie deleted"
     redirect_to root_path
@@ -45,7 +43,15 @@ class MoviesController < ApplicationController
 
   private 
 
+  def find_movie
+    @movie = Movie.find params[:id]
+  end 
+
   def movie_params 
     params.require(:movie).permit(:title, :body)
+  end
+
+  def find_movie_category
+    @category = Category.find params[:category_id]
   end
 end 
