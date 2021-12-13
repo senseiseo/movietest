@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :categories do 
-    resources :movies
-  end 
-  post 
+  resources :categories 
+  resources :movies
+
   root 'pages#index'
 end

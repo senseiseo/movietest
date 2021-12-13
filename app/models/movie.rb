@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
-  belongs_to :category
+  has_many :positions
+  has_many :categories, through: :positions
 
   validates :title, presence: true, length: {minimum:2}
   validates :body, presence: true, length: {minimum:2}
