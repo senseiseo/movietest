@@ -1,4 +1,6 @@
-<% provide :page_title, "show category"%>
+<% provide :page_title, "Show category"%>
+<% currently_at 'Category'%>
+
 <h1 class="mb-4"><%= @category.name %></h1>
 
 <% @movie.each do |movie| %>

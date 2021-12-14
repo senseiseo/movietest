@@ -2,19 +2,20 @@
 <% currently_at 'Home'%>
 
 <h1 class="mb-4">Home</h1>
-<%= link_to 'New movie', new_movie_path, class: 'btn btn-primary btn-lg' %>
-
-<% @all_movies.each do |movie| %>
-  <article class="card mt-3">
+<%= link_to 'New movie', new_movie_path, class: 'btn btn-primary btn-lg mb-3' %>
+<%== pagy_bootstrap_nav @pagy %>
+<% @movies.each do |movie| %>
+  <article class="card mt-3 mb-3">
     <div class="card-body">
-
       <h4><%= link_to movie.title, movie_path(movie) %></h4>
-      <h4><%= movie.body %></h4>
+      <h4><%= truncate strip_tags(movie.body), length: 150, omission: '... (continued)'%> </h4>
       <h4><%= format_average_stars(movie)%></h4>
-      <h4><% movie.categories&.each do |category| %>
-            <%= link_to category.name, category_path(category)%>
-          <% end %>
+      <h4>
+        <% movie.categories&.each do |category| %>
+          <%= link_to category.name, category_path(category)%>
+        <% end %>
       </h4>
     </div>
   </article>
 <% end %> 
+<%== pagy_bootstrap_nav @pagy %>

@@ -1,6 +1,10 @@
 class MoviesController < ApplicationController
   before_action :find_movie, only: %i[show edit update destroy]
 
+  def index
+    @pagy, @movies = pagy Movie.order(created_at: :desc)
+  end 
+
   def show 
   end 
 
@@ -23,11 +27,6 @@ class MoviesController < ApplicationController
     else
       render :edit
     end 
-  end 
-
-  def index
-    @all_movies = Movie.all 
-    @movies = Movie.all
   end 
 
   def new 
