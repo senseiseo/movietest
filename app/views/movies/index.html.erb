@@ -1,26 +1,20 @@
-<h1 class="mb-4">Movies</h1>
+<% provide :page_title, "Home"%>
+<% currently_at 'Home'%>
 
+<h1 class="mb-4">Home</h1>
 <%= link_to 'New movie', new_movie_path, class: 'btn btn-primary btn-lg' %>
 
-<% @movies.each do |movie| %>
+<% @all_movies.each do |movie| %>
   <article class="card mt-3">
     <div class="card-body">
-      <h4><%= movie.title %></h2>
 
-      <section class="card-text">
-        <time datetime="<%= movie.created_at_formatted %>">
-          <small><%= movie.created_at_formatted %></small>
-        </time>
-
-        <p class="my-2">
-          <%= movie.body %>
-        </p>
-      </section>
-
-      <%= link_to 'Show', movie_path(movie), class: 'btn btn-primary' %> 
-      <%= link_to 'Edit', edit_movie_path(movie), class: 'btn btn-secondary' %>
-      <%= link_to 'Destroy', movie_path(movie), class: 'btn btn-danger',
-        data: {method: :delete, confirm: 'Are you sure?'} %>
+      <h4><%= link_to movie.title, movie_path(movie) %></h4>
+      <h4><%= movie.body %></h4>
+      <h4><%= format_average_stars(movie)%></h4>
+      <h4><% movie.categories&.each do |category| %>
+            <%= link_to category.name, category_path(category)%>
+          <% end %>
+      </h4>
     </div>
   </article>
-<% end %>
+<% end %> 
