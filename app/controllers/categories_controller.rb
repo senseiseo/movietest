@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :find_category, only: %i[show edit update destroy]
 
   def show 
-    @movie = @category.movies
+    @movie = @category.movies.decorate
   end 
 
   # def edit 

@@ -11,10 +11,6 @@ class Movie < ApplicationRecord
     message: "Превышен порог от 1 до 10"
   }
 
-  def created_at_formatted 
-    created_at.strftime('%Y-%m-%d %H:%M:%S')
-  end 
-
   def average_stars
     # все оценки юзерей к этому фильму нужно будет выводить 
     #self.users.average(:stars)

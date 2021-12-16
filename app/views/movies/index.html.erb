@@ -3,7 +3,9 @@
 
 <h1 class="mb-4">Home</h1>
 <%= link_to 'New movie', new_movie_path, class: 'btn btn-primary btn-lg mb-3' %>
-<%== pagy_bootstrap_nav @pagy %>
+
+<%== pagy_bootstrap_nav @pagy  if @pagy.pages > 1 %>
+
 <% @movies.each do |movie| %>
   <article class="card mt-3 mb-3">
     <div class="card-body">
@@ -18,4 +20,5 @@
     </div>
   </article>
 <% end %> 
-<%== pagy_bootstrap_nav @pagy %>
+
+<%== pagy_bootstrap_nav @pagy  if @pagy.pages > 1%>

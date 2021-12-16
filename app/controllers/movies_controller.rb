@@ -3,9 +3,11 @@ class MoviesController < ApplicationController
 
   def index
     @pagy, @movies = pagy Movie.order(created_at: :desc)
+    @movies = @movies.decorate
   end 
 
   def show 
+    @movie = @movie.decorate
   end 
 
   def edit 
