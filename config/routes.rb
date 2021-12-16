@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   resources :categories 
   resources :movies
 
+  namespace :admin do 
+    resources :users, only: %i[index]
+  end 
+
   root 'movies#index'
 end
