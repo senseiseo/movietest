@@ -19,16 +19,6 @@
       <%= f.text_area :body, class: 'form-control' %>
     </div>
   </div>
-   
-  <div class="mb-3 row">
-    <div class="col-sm-2 col-form-label">
-    <%=f.label :stars %>
-    </div>
-
-    <div class="col-sm-10">
-    <%=f.select :stars, Movie::STARS, prompt: "Pick stars", class: "form-control" %>
-    </div>
-  </div>
 
   <div class="mb-3 row">
     <div class="col-sm-2 col-form-label">

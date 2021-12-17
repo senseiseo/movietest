@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index]
   end 
 
+  post '/ratings_create', to: 'ratings#ratings_create', as: 'ratings_create'
+
   root 'movies#index'
 end

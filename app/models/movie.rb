@@ -1,6 +1,8 @@
 class Movie < ApplicationRecord
+  belongs_to :user
   has_many :positions
   has_many :categories, through: :positions
+  has_many :ratings
 
   STARS = [1,2,3,4,5,6,7,8,9,10]
 
@@ -11,9 +13,4 @@ class Movie < ApplicationRecord
     message: "Превышен порог от 1 до 10"
   }
 
-  def average_stars
-    # все оценки юзерей к этому фильму нужно будет выводить 
-    #self.users.average(:stars)
-    Movie.average(:stars)
-  end
 end
