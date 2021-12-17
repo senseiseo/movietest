@@ -1,5 +1,6 @@
 class RatingsController < ApplicationController
-
+  skip_before_action :verify_authenticity_token
+  
   def ratings_create
     
     binding.pry

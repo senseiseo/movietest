@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import 'jquery-ujs'
 // document.getElementById('.js_create_ratings')
 // addEventListener('click', function(е) {
 //     е.preventDefault()
@@ -30,7 +31,8 @@ import $ from 'jquery'
 
 $(document).on('click', '.js_create_ratings', function() {
     //     var sale_manager = $(this).data("type");
-    //     var manager_id = $(this).data("id");
+    console.log("hello")
+        //     var manager_id = $(this).data("id");
     $.ajax({
         url: '/ratings_create',
         type: "post",
