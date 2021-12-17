@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
     category.delete_at(0)
     category_ids = @movie.categories.map { |movie| movie.id}
     category = category - category_ids
-    if @movie.update title: movie_params[:title], body: movie_params[:body],stars:movie_params[:stars]
+    if @movie.update title: movie_params[:title], body: movie_params[:body]
       if category.present?
         category.each do |category_id| 
           Position.create(movie_id: @movie.id , category_id: category_id)
@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
   def create
     category = movie_params[:category]
     category.delete_at(0)
-    @movie = Movie.create(title: movie_params[:title], body: movie_params[:body], stars:movie_params[:stars])
+    @movie = Movie.create(title: movie_params[:title], body: movie_params[:body])
     if @movie.save    
       if category.present?
         category.each do |category_id| 
@@ -65,6 +65,6 @@ class MoviesController < ApplicationController
   end 
 
   def movie_params 
-    params.require(:movie).permit(:title, :body, :stars, category: [])
+    params.require(:movie).permit(:title, :body, category: [])
   end
 end 
