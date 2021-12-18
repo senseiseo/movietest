@@ -7,4 +7,5 @@ class Movie < ApplicationRecord
 
   validates :title, presence: true, length: {minimum:2, maximum: 30}
   validates :body, presence: true, length: {minimum:25}
+
 end

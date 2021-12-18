@@ -8,11 +8,4 @@ class Rating < ApplicationRecord
     in: STARS, 
     message: " 1 do 10"
   }
-
-
-  def average_stars
-    # все оценки юзерей к этому фильму нужно будет выводить 
-    #self.users.average(:stars)
-    Rating.average(:stars)
-  end
 end

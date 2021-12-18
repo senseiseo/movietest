@@ -30,13 +30,16 @@ import 'jquery-ujs'
 // })
 
 $(document).on('click', '.js_create_ratings', function() {
-    //     var sale_manager = $(this).data("type");
+    var stars = $('#stars_stars_id_' + $(this).data("id")).select().val()
     console.log("hello")
-        //     var manager_id = $(this).data("id");
+    var movie_id = $(this).data("id");
+    console.log(movie_id);
+    console.log(stars);
+
     $.ajax({
         url: '/ratings_create',
         type: "post",
-        data: "",
+        data: { stars: stars, movie_id: movie_id },
         success: function(data) {
             // $('.wr-btn_' + manager_id).html("");
         },

@@ -11,15 +11,17 @@
     <div class="card-body">
       <h4><%= link_to movie.title, movie_path(movie) %></h4>
       <h4><%= truncate strip_tags(movie.body), length: 150, omission: '... (continued)'%> </h4>
-      <h4><%= movie.ratings%></h4>
-      <div class="js_create_ratings" data-type="add" data-id= "1">
-        <div class="col-sm-10">
-          <%=select :stars, Rating::STARS, prompt: "Pick stars", class: "form-control" %>
-          <div class=" data-type="add data-id="<%= movie.id %>">
-            <%= link_to 'create rating',  class: "js_create_ratings" %>
+      <h4><%= format_average_stars(movie)%></h4>
+        <div>
+          <div class="col-sm-10 stars_id_<%= movie.id %>">
+              <%=  select(:stars, "stars_id_#{movie.id}", Rating::STARS, class:'form-control' ) %>
+              <div class="js_create_ratings" data-id= <%= movie.id %> >
+                <%= link_to "create rating", "#",class: 'btn btn-primary mb-3'   %>
+                <div class="btn btn-primary mb-3"  data-id="<%= movie.id %>"><%="jkdjkdfkjd"%>
+                </div>
+              </div>
           </div>
         </div>
-      </div>
       <h4>
         <% movie.categories&.each do |category| %>
           <%= link_to category.name, category_path(category)%>
@@ -30,3 +32,4 @@
 <% end %> 
 
 <%= pagination @pagy %>
+

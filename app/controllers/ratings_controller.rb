@@ -2,11 +2,22 @@ class RatingsController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def ratings_create
-    
-    binding.pry
-    
-    # user_manager = current_user.sale_user_managers.find_by(manager_id: params[:manager_id])
-    # params[:sale_manager] == "add" ? user_manager.confirm! : user_manager.delete
-    # render json: {success: true}
+    movie = Movie.find params[:movie_id]
+      @rating = movie.ratings.build vote_params
+  
+      respond_to do |format|
+        if @rating.save
+          format.json { render json: @rating, status: :created, location: @rating }
+        else
+          format.json { render json: @rating.errors, status: :unprocessable_entity }
+        end
+      end
   end 
+
+  private 
+
+  def vote_params 
+    params.permit(:stars, :movie_id).merge(user: current_user)
+  end 
+
 end
