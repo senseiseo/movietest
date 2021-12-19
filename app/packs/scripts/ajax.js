@@ -30,18 +30,20 @@ import 'jquery-ujs'
 // })
 
 $(document).on('click', '.js_create_ratings', function() {
-    var stars = $('#stars_stars_id_' + $(this).data("id")).select().val()
-    console.log("hello")
+    const stars = $('#stars_stars_id_' + $(this).data("id")).select().val()
+    const current_item = $(this).parents('div')[0]
     var movie_id = $(this).data("id");
     console.log(movie_id);
     console.log(stars);
+    console.log(current_item);
 
     $.ajax({
         url: '/ratings_create',
         type: "post",
         data: { stars: stars, movie_id: movie_id },
         success: function(data) {
-            // $('.wr-btn_' + manager_id).html("");
+            $(current_item).fadeOut("slow")
+            console.log(data);
         },
         error: function(data) {}
     });
