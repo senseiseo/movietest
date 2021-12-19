@@ -6,6 +6,6 @@ class Rating < ApplicationRecord
 
   validates :stars, inclusion: {
     in: STARS, 
-    message: " 1 do 10"
+    message: "1 do 10"
   }
 end

@@ -1,6 +1,9 @@
-<div data-item_id="<%= object.id %>">
-<div class="col-sm-10 stars_id_<%= object.id %>">
-  <%=  select(:stars, "stars_id_#{object.id}", Rating::STARS, class:'form-control' ) %>   
-  <div class="btn btn-primary mb-2 js_create_ratings"  data-id="<%= object.id %>"><%="Vote"%></div>
-</div>
-</div>
+<h4 id="<%= object.id %>_rating"><%= format_average_stars(object)%></h4>
+<% if current_user.ratings.where(movie_id: object.id).blank? %>
+  <div data-item_id="<%= object.id %>">
+    <div class="col-sm-10 stars_id_<%= object.id %>">
+      <%=  select(:stars, "stars_id_#{object.id}", Rating::STARS, class:'form-control' ) %>   
+      <div class="btn btn-primary mb-2 js_create_ratings"  data-id="<%= object.id %>"><%="Vote"%></div>
+    </div>
+  </div>
+<% end %>

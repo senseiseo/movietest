@@ -11,10 +11,7 @@
     <div class="card-body">
       <h4><%= link_to movie.title, movie_path(movie) %></h4>
       <h4><%= truncate strip_tags(movie.body), length: 150, omission: '... (continued)'%> </h4>
-      <h4><%= format_average_stars(movie)%></h4>
-      <% if current_user.ratings.where(movie_id: movie.id).blank? %>
         <%= render 'shared/votes', object: movie %>
-      <% end %>
       <h4>
         <% movie.categories&.each do |category| %>
           <%= link_to category.name, category_path(category)%>

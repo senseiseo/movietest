@@ -7,8 +7,7 @@ class RatingsController < ApplicationController
   
       respond_to do |format|
         if @rating.save
-
-          format.json { render json: {data: 1, rating_sum: movie.ratings.average(:stars)} }
+          format.json { render json: {success: true, rating_sum: movie.ratings.average(:stars)}}
         else
           format.json { render json: @rating.errors, status: :unprocessable_entity }
         end
