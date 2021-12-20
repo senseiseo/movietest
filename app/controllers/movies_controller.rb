@@ -1,9 +1,19 @@
 class MoviesController < ApplicationController
   before_action :find_movie, only: %i[show edit update destroy]
+  before_action :all_categories
 
   def index
-    @pagy, @movies = pagy Movie.order(created_at: :desc)
-    @movies = @movies.decorate
+    # @pagy, @movies = pagy Movie.order(created_at: :desc)
+    # @movies = @movies.decorate
+      if params.has_key?(:category)  
+        @category = Category.find_by_name(params[:category])
+        @pagy, @movies = pagy @category.movies
+        @movies = @movies.decorate
+      else
+        @pagy, @movies = pagy Movie.order(created_at: :desc)
+        @movies = @movies.decorate
+        @category = Category.all 
+      end 
   end 
 
   def show 
@@ -67,5 +77,9 @@ class MoviesController < ApplicationController
     category.delete_at(0)
     category_ids = @movie.categories.map { |movie| movie.id}
     category = category - category_ids
+  end 
+
+  def all_categories
+    @all_categories = Category.all
   end 
 end 

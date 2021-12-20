@@ -2,8 +2,12 @@
   <th scope="row"><%= movie.id %></th>
   <td><%= movie.title %></td>
   <td><%= truncate movie.body, length: 150, omission: '... (continued)'%></td>
+  <td>
+  <% movie.categories.each do |category| %>
+    <%= category.name %>
+  <% end %>
+  </td>
   <td><%= movie.created_at %></td>
-  <td><%= movie.updated_at %></td>
   <td> 
     <%= link_to 'Show', admin_movie_path(movie), class: 'btn btn-primary'%>
     <%= link_to 'Edit', edit_admin_movie_path(movie), class: 'btn btn-secondary'%>
