@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :admin do 
     resources :users, only: %i[index create edit update destroy]
     resources :movies
-    resources :categories, only: %i[new create edit update destroy]
+    resources :categories, only: %i[index new create edit update destroy]
   end 
 
   post '/ratings_create', to: 'ratings#ratings_create', as: 'ratings_create'
