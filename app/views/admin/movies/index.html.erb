@@ -1,0 +1,26 @@
+<% provide :page_title, 'Admin movies' %>
+<% currently_at 'Movies' %>
+
+<h1 class="mb-4">Admin Movies</h1>
+
+<%= pagination @pagy %>
+  
+<%= link_to 'New movie', new_admin_movie_path, class: 'btn btn-primary'%>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Body</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @movies %>
+  </tbody>
+</table>
+
+<%= pagination @pagy %>

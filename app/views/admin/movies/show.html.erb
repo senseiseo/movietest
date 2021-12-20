@@ -1,0 +1,26 @@
+<% provide :page_title, 'Admin movies' %>
+<% currently_at 'Show movies' %>
+
+<h1 class="mb-4">Admin Movies</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Body</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+    <th scope="row"><%= @movie.id %></th>
+      <td><%= @movie.title %></td>
+      <td><%= @movie.body %></td>
+      <td><%= @movie.created_at %></td>
+      <td><%= @movie.updated_at %></td>
+      <td> 
+        <%= link_to 'Edit', edit_admin_movie_path(@movie), class: 'btn btn-secondary'%>
+        <%= link_to 'Delete', admin_movie_path(@movie), class: 'btn btn-danger', data: {method: :delete, confirm: "You are sure?"} %>
+      </td>
+  </thead>
+</table>

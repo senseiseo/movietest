@@ -1,12 +1,12 @@
-<%= render 'shared/errors', object: @user %>
-<%= form_with model: @user do |f| %>
+<%= render 'shared/errors', object: user %>
+<%= form_with model: [:admin, user] do |f| %>
   <div class="mb-3 row">
     <div class="col-sm-2 col-form-label">
       <%= f.label :email %>
     </div>
 
     <div class="col-sm-10">
-      <%= f.email_field :email, placeholder: 'E-mail', class: 'form-control form-control-lg' %>
+      <%= f.email_field :email, class: 'form-control form-control-lg' %>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-sm-10">
-      <%= f.text_field :name, placeholder: 'Name', class: 'form-control form-control-lg' %>
+      <%= f.text_field :name, class: 'form-control form-control-lg' %>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
     </div>
 
     <div class="col-sm-10">
-      <%= f.text_field :role, class: 'form-control-plaintext form-control-lg', readonly: true %>
+      <%= f.select :role, user_roles, {}, class: 'form-select form-select-lg' %>
     </div>
   </div>
 
@@ -50,17 +50,6 @@
     </div>
   </div>
 
-  <% unless @user.new_record? %>
-    <div class="mb-3 row">
-      <div class="col-sm-2 col-form-label">
-        <%= f.label :old_password %>
-      </div>
-
-      <div class="col-sm-10">
-        <%= f.password_field :old_password, class: 'form-control form-control-lg' %>
-      </div>
-    </div>
-  <% end %>
-  <%= f.submit (@user.new_record? ? "Register!" : "Save"),
+  <%= f.submit (user.new_record? ? "Register!" : "Save"),
     class: 'btn btn-primary btn-lg' %>
 <% end %>

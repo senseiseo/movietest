@@ -1,5 +1,6 @@
 <h4 id="<%= object.id %>_rating"><%= format_average_stars(object)%></h4>
-<% if current_user.ratings.where(movie_id: object.id).blank? %>
+
+<% if  user_signed_in?  &&  current_user&.ratings&.where(movie_id: object.id).blank?%>
   <div data-item_id="<%= object.id %>">
     <div class="col-sm-10 stars_id_<%= object.id %>">
       <%=  select(:stars, "stars_id_#{object.id}", Rating::STARS, class:'form-control' ) %>   

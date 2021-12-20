@@ -1,30 +1,12 @@
-class MoviesController < ApplicationController
-  before_action :find_movie, only: %i[show edit update destroy]
-
-  def index
-    @pagy, @movies = pagy Movie.order(created_at: :desc)
-    @movies = @movies.decorate
-  end 
+class Admin::MoviesController < ApplicationController
+  before_action :requiere_authentication #, only: %i[edit update]
+  before_action :set_movie! , only: %i[show edit update destroy]
 
   def show 
-    @movie = @movie.decorate
   end 
 
-  def edit 
-  end 
-
-  def update
-    if @movie.update title: movie_params[:title], body: movie_params[:body]
-      if add_category.present?
-        add_category.each do |category_id| 
-          Position.create(movie_id: @movie.id , category_id: category_id)
-        end
-      end
-      flash[:success] = "Movie updated"
-      redirect_to movie_path
-    else
-      render :edit
-    end 
+  def index 
+    @pagy, @movies = pagy Movie.order(created_at: :desc)
   end 
 
   def new 
@@ -40,27 +22,44 @@ class MoviesController < ApplicationController
         end
       end
       flash[:success] = "Movie created"
-      redirect_to root_path
+      redirect_to admin_movies_path
     else
         render :new
     end
   end 
+
+  def edit 
+  end 
   
+  def update
+    if @movie.update title: movie_params[:title], body: movie_params[:body]
+      if category.present?
+        add_category.each do |category_id| 
+          Position.create(movie_id: @movie.id , category_id: category_id)
+        end
+      end
+      flash[:success] = "Movie updated"
+      redirect_to admin_movies_path
+    else
+      render :edit
+    end 
+  end  
+
   def destroy
     @movie.destroy
     flash[:success] = "Movie deleted"
-    redirect_to root_path
-  end 
+    redirect_to admin_movies_path
+  end
 
   private 
 
-  def find_movie
+  def set_movie!
     @movie = Movie.find params[:id]
   end 
-
-  def movie_params 
+  
+  def movie_params
     params.require(:movie).permit(:title, :body, category: [])
-  end
+  end 
 
   def add_category
     category = movie_params[:category]

@@ -1,0 +1,35 @@
+<%= render 'shared/errors', object: movie %>
+<%= form_with model: [:admin, movie] do |f| %>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :title %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_field :title, class: 'form-control form-control-lg' %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :body %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_area :body, class: 'form-control form-control-lg' %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label">
+      <%= f.label :category %>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.collection_select :category, Category.order(:name), :id, :name, {}, multiple: true, class:'form-control' %>
+    </div>
+  </div>
+
+  <%= f.submit  "Save", class: 'btn btn-primary btn-lg' %>
+<% end %>
