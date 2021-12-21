@@ -28,14 +28,14 @@ module Authentication
       current_user.present?
     end 
 
-    def requiere_authentication
+    def require_authentication
       return if user_signed_in?
 
       flash[:warning] = "You are not signed in!"
       redirect_to root_path
     end 
 
-    def requiere_no_authentication
+    def require_no_authentication
       return unless user_signed_in?
 
       flash[:warning] = "You are already signed in!"

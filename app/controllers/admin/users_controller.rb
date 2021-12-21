@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :requiere_authentication #, only: %i[edit update]
+  before_action :require_authentication #, only: %i[edit update]
   before_action :set_user! , only: %i[edit update destroy]
 
   def index 

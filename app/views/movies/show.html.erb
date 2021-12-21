@@ -12,8 +12,10 @@
 </div>
 <%= render 'shared/votes', object: @movie %>
 
-<% if current_user&.role == "admin"%>
+<% if policy(@movie).edit? %>
   <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-secondary' %>
+<% end %>
+<% if policy(@movie).destroy? %>
   <%= link_to 'Destroy', movie_path(@movie), class: 'btn btn-danger',
     data: {method: :delete, confirm: 'Are you sure?'} %>
 <% end %>

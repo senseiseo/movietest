@@ -14,7 +14,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'draper', '~> 4.0'
 gem 'valid_email2', '~> 4.0'
 gem 'webpacker', '6.0.0.rc.6'
-
+gem 'pundit', '~> 2.1'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

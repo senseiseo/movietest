@@ -1,5 +1,5 @@
 class Admin::MoviesController < ApplicationController
-  before_action :requiere_authentication #, only: %i[edit update]
+  before_action :require_authentication #, only: %i[edit update]
   before_action :set_movie! , only: %i[show edit update destroy]
 
   def show 
@@ -14,7 +14,7 @@ class Admin::MoviesController < ApplicationController
   end 
 
   def create
-    @movie = Movie.create(title: movie_params[:title], body: movie_params[:body])
+    @movie = Movie.create title: movie_params[:title], body: movie_params[:body], user_id: movie_params[:user][:id]
     if @movie.save    
       if add_category.present?
         add_category.each do |category_id| 
@@ -58,7 +58,7 @@ class Admin::MoviesController < ApplicationController
   end 
   
   def movie_params
-    params.require(:movie).permit(:title, :body, category: [])
+    params.require(:movie).permit(:title, :body, category: []).merge(user: current_user)
   end 
 
   def add_category

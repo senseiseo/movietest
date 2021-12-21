@@ -32,6 +32,14 @@ class User < ApplicationRecord
     BCrypt::Password.new(remember_token_digest).is_password?(remember_token)
   end 
 
+  def guest?
+    false
+  end 
+
+  def author?(obj)
+    obj.user == self
+  end 
+
   private
 
   def digest(string)

@@ -1,5 +1,5 @@
 class Admin::CategoriesController < ApplicationController
-  before_action :requiere_authentication #, only: %i[edit update]
+  before_action :require_authentication #, only: %i[edit update]
   before_action :set_category! , only: %i[show edit update destroy]
 
   def index 

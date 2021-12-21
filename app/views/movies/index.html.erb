@@ -3,7 +3,7 @@
 
 <h1 class="mb-4">Home</h1>
 
-<% if current_user&.role == "admin"%>
+<% if user_signed_in? %>
   <%= link_to 'New movie', new_movie_path, class: 'btn btn-primary btn-lg mb-3' %>
 <% end %>
 

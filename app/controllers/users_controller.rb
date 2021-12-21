@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :requiere_no_authentication, only: %i[new create]
-  before_action :requiere_authentication, only: %i[edit update]
+  before_action :require_no_authentication, only: %i[new create]
+  before_action :require_authentication, only: %i[edit update]
   before_action :set_user!, only: %i[edit update]
 
   def edit 

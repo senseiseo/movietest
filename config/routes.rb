@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create edit update]
   
-  resources :categories 
+  resources :categories,  only: %i[index show]
   resources :movies
 
   namespace :admin do 
