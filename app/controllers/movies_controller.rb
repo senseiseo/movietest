@@ -42,9 +42,6 @@ class MoviesController < ApplicationController
   end 
 
   def create
-    
-    binding.pry
-    
     @movie = Movie.create title: movie_params[:title], body: movie_params[:body], user_id: movie_params[:user][:id]
     if @movie.save    
       if add_category.present?
@@ -85,5 +82,4 @@ class MoviesController < ApplicationController
   def authorize_movie!
     authorize(@movie || Movie)
   end 
-
 end 
