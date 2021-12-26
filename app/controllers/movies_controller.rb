@@ -24,12 +24,7 @@ class MoviesController < ApplicationController
   end 
 
   def update
-    if @movie.update title: movie_params[:title], body: movie_params[:body]
-      if add_category.present?
-        add_category.each do |category_id| 
-          Position.create(movie_id: @movie.id , category_id: category_id)
-        end
-      end
+    if @movie.update movie_params
       flash[:success] = "Movie updated"
       redirect_to movie_path
     else
@@ -42,17 +37,12 @@ class MoviesController < ApplicationController
   end 
 
   def create
-    @movie = Movie.create title: movie_params[:title], body: movie_params[:body], user_id: movie_params[:user][:id]
-    if @movie.save    
-      if add_category.present?
-        add_category.each do |category_id| 
-          Position.create(movie_id: @movie.id, category_id: category_id)
-        end
-      end
+    @movie = Movie.new(movie_params)
+    if @movie.save        
       flash[:success] = "Movie created"
       redirect_to root_path
     else
-        render :new
+      render :new
     end
   end 
   
@@ -69,15 +59,8 @@ class MoviesController < ApplicationController
   end 
 
   def movie_params 
-    params.require(:movie).permit(:title, :body, category: []).merge(user: current_user)
+    params.require(:movie).permit(:title, :body, category_ids: []).merge(user: current_user)
   end
-
-  def add_category
-    category = movie_params[:category]
-    category.delete_at(0)
-    category_ids = @movie.categories.map { |movie| movie.id}
-    category = category - category_ids
-  end 
 
   def authorize_movie!
     authorize(@movie || Movie)
