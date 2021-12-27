@@ -5,15 +5,8 @@ class MoviesController < ApplicationController
   after_action :verify_authorized
 
   def index
-    if params.has_key?(:category)  
-      @category = Category.find_by_name(params[:category])
-      @pagy, @movies = pagy @category.movies
-      @movies = @movies.decorate
-    else
       @pagy, @movies = pagy Movie.order(created_at: :desc)
       @movies = @movies.decorate
-      @category = Category.all 
-    end 
   end 
 
   def show 

@@ -19,8 +19,8 @@
       <h4><%= truncate strip_tags(movie.body), length: 150, omission: '... (continued)'%> </h4>
         <%= render 'shared/votes', object: movie %>
       <h4>
-        <% movie.categories&.each do |category| %>
-          <%= link_to category.name, movies_path(category: category.name) %>
+        <% movie.categories.each do |category| %>
+          <%= link_to category.name, category_path(category) %>
         <% end %>
       </h4>
     </div>
